@@ -1,0 +1,24 @@
+<%= @artist.name %> (<%= @artist.age %>)
+<div class="bio" style="width: 200px; word-wrap: break-word; word-break:break-all; ">
+<%= @artist.bio %>
+</div>
+<% @songs.each do |song| %>
+<%
+	min = song.duration / 60
+	sec = song.duration % 60
+	@duration ='%d:%.2d' % [min, sec]
+%>
+<li><%= song.title %> <%= @duration %> Year <%= song.year %> -- <%= link_to song.genre.name, { :controller => 'genres', :action => 'browse' ,  :id => song.genre.id } %></li>
+<% end %> 
+<br><br>
+<%= form_for :artist, url: {action: "addsong", :id => @artist.id} do |f| %>
+<%= f.fields_for :songs do |s| %>
+Title: <%= s.text_field  :title %>
+Duration: <%= s.text_field  :duration, :size => 3 %>
+Year: <%= s.text_field  :year, :size => 3 %>
+<% Genre.all.each do |gen| %>
+	<%= s.radio_button :genre_id, gen.id %><%= gen.name %>
+<% end %>
+<% end %>
+<%= f.submit 'Add song' %>
+<% end %>

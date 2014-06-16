@@ -1,0 +1,7 @@
+<h1>Browse Genres</h1>
+
+<ul>
+<% @genres.each do |gen| %>
+<li><%= link_to gen.name, {:action => :browse, :id => gen.id } %></li><br>
+<% end %>
+</ul>

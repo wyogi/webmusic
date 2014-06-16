@@ -1,0 +1,12 @@
+<h1> Available Artist </h1>
+<ul>
+<% @artists.each do |artist| %>
+<li><%= link_to artist.name, {:action => 'details', :id => artist.id} %></li>
+<% end %>
+<br><br>
+<%= form_for :artist, url: {action: "create"} do |f| %>
+Name: <%= f.text_field :name %>
+Age : <%= f.text_field :age, :size => 1 %>
+<br>Biography:<br><%= f.text_area :bio, :size => '20x3' %>
+<br><%= f.submit %>
+<% end %>

@@ -1,0 +1,17 @@
+<h1> Add New artist <h1>
+<%= form_for :artist, url: { action: "create" } do |t| %>
+<p>
+	<%= t.label "Name: " %>
+	<%= t.text_field :name %>
+</p>
+<p>
+	<%= t.label "Age: " %>
+	<%= t.text_field :age, :size => 1 %>
+</p>
+<p>
+	<%= t.label "Biography:" %>
+	<%= t.text_area :bio, :size => "30x10" %>
+</p>
+<%= t.submit  %>
+<% end %>
+

@@ -1,0 +1,14 @@
+Available <%= @genre.name %> Songs
+
+<% if @genre.songs.blank? %>
+<p> There are no songs in this genre </p>
+<% else %>
+<% @genre.songs.each do |song| %>
+<%
+	min = song.duration / 60
+	sec = song.duration % 60
+	@duration = '%d:%.2d' % [min, sec]
+%>	
+<li><%= link_to song.artist.name, :controller => 'artists', :action => 'details', :id => song.artist.id %> - <%= song.title %> (<%= @duration %>)
+<% end %>
+<% end %>
